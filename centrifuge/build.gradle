@@ -77,3 +77,24 @@ uploadArchives {
         }
     }
 }
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protobuf-java:3.6.1'
+    }
+    plugins {
+        javalite {
+            artifact = 'com.google.protobuf:protobuf-lite:3.0.1'
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                remove java
+            }
+            task.plugins {
+                javalite { }
+            }
+        }
+    }
+}
